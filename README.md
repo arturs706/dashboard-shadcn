@@ -20,19 +20,18 @@ This project is a powerful and sleek web dashboard built using Next.js 15 and th
 
 Clone the repository:
 
-git clone https://github.com/arturs706/dashboard-shadcn
+`git clone https://github.com/arturs706/dashboard-shadcn`
 
 Install the dependencies (using pnpm):
 
-pnpm install
+`pnpm install`
 
 Run the development server:
 
-bash
-
-pnpm run dev
+`pnpm run dev`
 
 Open your browser at http://localhost:3000.
+
 🚧 **Development**
 
 * **Components:** All components are reusable and customizable, thanks to the flexibility of the shadcn/ui library.
