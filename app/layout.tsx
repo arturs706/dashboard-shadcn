@@ -3,7 +3,7 @@ import { Roboto } from 'next/font/google'
 import "./globals.css";
 import { getServerSideAuth } from '@/context/authUtils';
 import { AuthProvider } from '@/context/authContext';
-
+import Nav from "@/components/elements/Nav";
 
 const roboto = Roboto({
   weight: ['400', '700'],
@@ -23,6 +23,7 @@ export default function RootLayout({
    <body
       className={`${roboto.className} antialiased`}
       >
+        {initialAuthState ? <Nav /> : null}
         <AuthProvider initialAuthState={initialAuthState}>
           {children}
         </AuthProvider>
