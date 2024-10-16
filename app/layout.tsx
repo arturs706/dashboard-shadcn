@@ -4,6 +4,7 @@ import "./globals.css";
 import { getServerSideAuth } from '@/context/authUtils';
 import { AuthProvider } from '@/context/authContext';
 import Nav from "@/components/elements/Nav";
+import MobileNav from "@/components/elements/MobileNav";
 
 const roboto = Roboto({
   weight: ['400', '700'],
@@ -24,6 +25,7 @@ export default function RootLayout({
       className={`${roboto.className} antialiased`}
       >
         {initialAuthState ? <Nav /> : null}
+        {initialAuthState ? <MobileNav /> : null}
         <AuthProvider initialAuthState={initialAuthState}>
           {children}
         </AuthProvider>
