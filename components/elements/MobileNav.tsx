@@ -14,7 +14,7 @@ import { DialogTitle } from "@radix-ui/react-dialog"
 
 export default function MobileNav() {
   return (
-    <header className="flex h-16 w-full shrink-0 items-center justify-end px-4 md:px-6">
+    <header className="flex h-14 w-full shrink-0 items-center justify-end px-4 md:px-6 lg:hidden ">
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="lg:hidden">
@@ -22,9 +22,13 @@ export default function MobileNav() {
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="right">
+
+        <SheetContent 
+        side="right"
+        className="w-full md:w-[400px]"
+        >
           <DialogTitle className="sr-only">Navigation Menu</DialogTitle>
-          <div className="grid gap-2 py-2">
+          <div className="grid gap-2 py-2 ">
             <div>
               <div className="mb-2 mt-2 text-xl font-medium flex justify-center items-center">
                 Stelfort Ltd
