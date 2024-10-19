@@ -6,7 +6,7 @@ export const personalTools: { title: string; href: string; description: string }
     },
     {
       title: "My Diary",
-      href: "/diary",
+      href: "/diary/:id",
       description: "A personal diary for managing appointments, events, and reminders."
     },
     {

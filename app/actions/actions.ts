@@ -3,7 +3,6 @@ import "server-only";
 import { cookies } from 'next/headers';
 import { z } from "zod";
 import { createServerAction } from "zsa";
-import { redirect } from "next/navigation";
 
 export const loginAction = createServerAction()
 .input(z.object({
@@ -11,6 +10,12 @@ export const loginAction = createServerAction()
     password: z.string().min(1, "Password is required"),
 }))
 .output(z.object({
+    message: z.string(),
+    user: z.object({
+        user_id: z.string(),
+        username: z.string(),
+        acc_level: z.string(),
+    }).optional(),
     errors: z.object({
         username: z.string().optional(),
         password: z.string().optional(),
@@ -48,12 +53,17 @@ export const loginAction = createServerAction()
     }
 
     if (response.ok && data.message === "Login successful") {
-        redirect('/');
+        return {
+            message: "Login successful",
+            user: data.user,
+            errors: {}
+        };
     } else {
         return {
-           errors: {
-            password: "Invalid username or password",
-           }
+            message: "Login failed",
+            errors: {
+                password: "Invalid username or password",
+            }
         };
     }
 });

@@ -25,7 +25,7 @@ export default function MobileNav() {
 
         <SheetContent 
         side="right"
-        className="w-full md:w-[400px]"
+        className="w-full md:w-[400px] lg:hidden"
         >
           <DialogTitle className="sr-only">Navigation Menu</DialogTitle>
           <div className="grid gap-2 py-2 ">

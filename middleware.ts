@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import { cookies } from "next/headers";
 
 export function decodeToken(token: string): Record<string, any> {
-    const base64Url = token.split('.')[1]; // Get the payload part of the JWT
+    const base64Url = token.split('.')[1]; 
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     const decodedPayload = Buffer.from(base64, 'base64').toString('utf8');
     return JSON.parse(decodedPayload);
@@ -82,14 +82,12 @@ export async function middleware(request: NextRequest) {
         }
     } catch (err) {
         console.error("Token decoding failed or other error:", err);
-        // In case of an error, redirect to login page
         return NextResponse.redirect(new URL("/login", request.url));
     }
 
     return NextResponse.next();
 }
 
-// Configuration for the middleware
 export const config = {
-    matcher: ["/", "/login"], // Apply middleware to the home page and login page
+    matcher: ["/", "/login"], 
 };
