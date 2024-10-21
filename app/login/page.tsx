@@ -9,9 +9,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { useAuth, AuthContextProps } from "@/context/authContext";
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useRouter } from 'next/navigation';
+
+
 
 const formSchema = z.object({
   username: z.string().min(1, "Username is required"),
@@ -23,7 +24,6 @@ type LoginFormData = z.infer<typeof formSchema>;
 export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { setAuthenticated, setAccLevel, setUserId, setUsername } = useAuth() as AuthContextProps; 
   const router = useRouter();
 
   const form = useForm<LoginFormData>({
@@ -61,22 +61,21 @@ export default function Login() {
           setError(actionError.message || "An error occurred during login.");
         }
       } else if (data && data.errors) {
-        setAuthenticated(true);
-        setAccLevel(data.user?.acc_level || '');
-        setUserId(data.user?.user_id || '');
-        setUsername(data.user?.username || '');
-
+        const errorsLength = Object.keys(data.errors).length;
+        if (errorsLength === 0) {          
+          form.reset();
+        }
+       
         Object.entries(data.errors).forEach(([field, error]) => {
           if (error) {
             form.setError(field as keyof LoginFormData, {
               type: "manual",
-              message: formatFieldError(error)
+              message: formatFieldError(error as string | { errors: string[] })
             });
           }
         });
       } else {
-        console.log('data.user:', data.user);
-        setAuthenticated(true);
+        
         form.reset();
       }
     } catch (error) {
@@ -138,3 +137,4 @@ export default function Login() {
     </main>
   );
 }
+

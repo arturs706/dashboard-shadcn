@@ -1,28 +1,24 @@
 "use client";
+import React, { useEffect } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { useRouter } from 'next/navigation';
 
-import React from 'react';
-import { useAuth } from '@/context/authContext';
-
-export const HomePage = () => {
-  const { isAuthenticated, acc_level, user_id, username } = useAuth(); 
-
-  console.log('isAuthenticated:', isAuthenticated);
-  console.log('User Details:', { acc_level, user_id, username }); // Log user details
-
+const Dashboard = () => {
   return (
-    <div>
-      <h1>Home Page</h1>
-      {isAuthenticated ? (
-        <div>
-          <p>Welcome, {username}!</p>
-          <p>Your account level: {acc_level}</p>
-          <p>Your User ID: {user_id}</p>
-        </div>
-      ) : (
-        <p>Please log in to access your account details.</p>
-      )}
+    <div className="p-8">
+      <Card>
+        <CardHeader>
+          <CardTitle>Welcome to Dashboard</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p>You are logged in as: </p>
+          <p>Your account level is: </p>
+          
+        </CardContent>
+      </Card>
     </div>
   );
 }
 
-export default HomePage;
+
+export default Dashboard;
