@@ -1,14 +1,21 @@
 {
-  "name": "dashboard",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "init": "^0.1.2",
+    "jsonwebtoken": "^9.0.2",
+    "next": "15.0.0",
+    "react": "19.0.0-rc-65a56d0e-20241020",
+    "react-dom": "19.0.0-rc-65a56d0e-20241020",
+    "server-only": "^0.0.1",
+    "shadcn": "^2.1.0",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-avatar": "^1.1.1",
@@ -22,27 +29,22 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.8",
     "jotai": "^2.10.1",
-    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.451.0",
-    "next": "15.0.0-rc.0",
-    "react": "19.0.0-rc-f994737d14-20240522",
-    "react-dom": "19.0.0-rc-f994737d14-20240522",
     "react-hook-form": "^7.53.0",
     "recharts": "^2.13.0",
-    "server-only": "^0.0.1",
     "tailwind-merge": "^2.5.3",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8",
     "zsa": "^0.6.0"
   },
   "devDependencies": {
+    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "15.0.0-rc.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "eslint": "^8",
+    "eslint-config-next": "15.0.0"
   }
 }

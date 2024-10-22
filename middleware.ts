@@ -1,5 +1,6 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { cookies } from "next/headers";
+
 
 export function decodeToken(token: string): Record<string, any> {
     const base64Url = token.split('.')[1]; 
@@ -34,7 +35,7 @@ async function refreshAccessToken(refreshToken: string): Promise<string> {
 
 // Middleware function
 export async function middleware(request: NextRequest) {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const accessToken = cookieStore.get("access_token")?.value;
     const refreshToken = cookieStore.get("refresh_token")?.value;
 

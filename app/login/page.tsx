@@ -79,7 +79,8 @@ export default function Login() {
         form.reset();
       }
     } catch (error) {
-      setError("An unexpected error occurred. Please try again.");
+        
+      setError("error" + error);
     } finally {
       setLoading(false);
       router.push('/'); 
