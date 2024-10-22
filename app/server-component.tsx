@@ -11,13 +11,19 @@ export function decodeToken(token: string): Record<string, any> {
 }
 
 export async function getData() {
+  const apiHost = process.env.API_HOST;
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("access_token")?.value;
-  if (!accessToken) {
+  if (!accessToken || accessToken === '' || accessToken === 'undefined') {
     throw new Error("Access token not found");
   }
+  if (decodeToken(accessToken).exp < Date.now() / 1000) {
+    throw new Error("Access token expired");
+  }
   const uuid = decodeToken(accessToken).sub;
-  const res = await fetch(`http://127.0.0.1:10000/api/v1/users/${uuid}`, {
+  const apiUrl = `${apiHost}/api/v1/users/${uuid}`;
+
+  const res = await fetch(apiUrl, {
     headers: {
       'Authorization': `Bearer ${accessToken}`,
       'Content-Type': 'application/json',

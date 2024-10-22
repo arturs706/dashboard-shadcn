@@ -49,21 +49,16 @@ export async function middleware(request: NextRequest) {
             if (isLoginPage && decodedToken.exp > currentTime) {
                 return NextResponse.redirect(new URL("/", request.url)); // Redirect to home or dashboard
             }
-
-            // If the token is expired
             if (decodedToken.exp < currentTime) {
                 console.log("Token has expired.");
                 if (isLoginPage) {
-                    // Let the user stay on the login page if token expired
                     return NextResponse.next();
                 }
-
-                // If refresh token is available, try to refresh the access token
                 if (refreshToken) {
                     try {
                         const newAccessToken = await refreshAccessToken(refreshToken);
                         const response = NextResponse.next();
-                        response.cookies.set("access_token", newAccessToken, { httpOnly: true, sameSite: 'lax', path: '/' });
+                        await response.cookies.set("access_token", newAccessToken, { httpOnly: true, sameSite: 'lax', path: '/' });
                         console.log("Access token refreshed successfully.");
                         return response;
                     } catch (refreshError) {
